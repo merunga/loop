@@ -6,7 +6,7 @@ var server = connect(
       connect.static(__dirname + '/client')
     );
 
-var options = {db: {type: 'memory'}}; // See docs for options. {type: 'redis'} to enable persistance.
+var options = {db: {type: 'redis'}}; // See docs for options. {type: 'redis'} to enable persistance.
 
 // Attach the sharejs REST and Socket.io interfaces to the server
 sharejs.attach(server, options);
