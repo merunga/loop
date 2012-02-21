@@ -102,7 +102,8 @@ $(document).ready(function(){
 				.click(function(){
 					$(this).toggleClass('active');
 					//buildHash();
-                    $state.submitOp({
+               //alert($(this).html())
+               $state.submitOp({
     					p: eval($(this).html()),
 						ld:0, li:username
 					});
@@ -213,6 +214,7 @@ $(document).ready(function(){
 	}
     
     function stateUpdated(op) {
+       //alert(JSON.stringify(op))
 		if (op) {
             user_src = op[0]['li']
             sound_id = op[0]['p'][0]
