@@ -38,6 +38,7 @@ function playBeat() {
 
 // Make a new hash
 function buildHash() {
+   /*
 	// Start it
 	var newhash = '';
 	// For each pip, check and add in a 0/1 as appropriate
@@ -50,6 +51,7 @@ function buildHash() {
 	newhash += $('#temposlider').slider('value');
 	// Check and see if we really need to update
 	if (location.hash != '#' + newhash) location.hash = newhash;
+	*/
 } // buildHash
 
 // Read in our hash
