@@ -81,3 +81,15 @@ ul.soundrow li.col_11 {
 	border: inset 3px #FFA000;
 	background-color: #FFA000;
 }
+
+/*input[name=colour] {
+   visibility: hidden;
+}*/
+
+.left {
+   float: left;
+ }
+ 
+#user > .left {
+   float: left;
+}

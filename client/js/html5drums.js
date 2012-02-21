@@ -253,4 +253,9 @@ $(document).ready(function(){
             }
         }
     });
+    
+    jQuery('select#color-picker').colourPicker({
+      ico:    '/assets/jquery.colourPicker.gif', 
+      title:    false
+   });
 });
