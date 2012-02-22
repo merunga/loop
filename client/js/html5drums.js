@@ -235,8 +235,11 @@ $(document).ready(function(){
             step = op[0]['p'][1]
             //alert(user_src)
             if(user_src != username) {
-            	$usrdom = $('<li><span style="width: 20px; background-color:'+color_src+'">&nbsp;&nbsp;&nbsp;&nbsp;</span> '+realname_src+'</li>')
-            	$('#otherusers').append($usrdom)
+            	if($other_users.indexOf(user_src) == -1) {
+	            	$usrdom = $('<li><span style="width: 20px; background-color:'+color_src+'">&nbsp;&nbsp;&nbsp;&nbsp;</span> '+realname_src+'</li>')
+	            	$('#otherusers').append($usrdom)
+	            	$other_users.push(user_src)
+            	}
                 updateState($('ul#control_'+sound_id+' > .col_'+step),color_src)
             }
 		} else {
@@ -244,6 +247,7 @@ $(document).ready(function(){
 		}
 	}
     
+    var $other_users = []
     var $state;
     if (!document.location.hash) {
         document.location.hash = '#' + randomDocName();
