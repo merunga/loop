@@ -111,13 +111,14 @@ $(document).ready(function(){
 				$('<li class="pip col_'+j+'">["'+self.id+'",'+j+']</li>')
 				.click(function(){
    					usercolor = '#'+$('input[name=colour]').val()
+   					realname = $('input[name=username]').val()
 					updateState($(this), usercolor)
 					//buildHash();
                		//alert($(this).html())
 
                		$state.submitOp({
     					p: eval($(this).html()),
-						ld:0, oi:{'name':username,'color':usercolor}
+						ld:0, oi:{'name':username,'color':usercolor,'realname':realname}
 					});	
 				})
 				.data('sound_id', self.id);
@@ -226,14 +227,16 @@ $(document).ready(function(){
 	}
     
     function stateUpdated(op) {
-    	
 		if (op) {
+			realname_src = op[0]['oi'].realname
             user_src = op[0]['oi'].name
             color_src = op[0]['oi'].color
             sound_id = op[0]['p'][0]
             step = op[0]['p'][1]
-            alert(user_src)
+            //alert(user_src)
             if(user_src != username) {
+            	$usrdom = $('<li><span style="width: 20px; background-color:'+color_src+'">&nbsp;&nbsp;&nbsp;&nbsp;</span> '+realname_src+'</li>')
+            	$('#otherusers').append($usrdom)
                 updateState($('ul#control_'+sound_id+' > .col_'+step),color_src)
             }
 		} else {
@@ -245,8 +248,9 @@ $(document).ready(function(){
     if (!document.location.hash) {
         document.location.hash = '#' + randomDocName();
     }
-    var docname = 'loop:' + document.location.hash.slice(1);
-    
+    var hashname = document.location.hash.slice(1);
+    var docname = 'loop:' + hashname
+
     sharejs.open(docname, 'json', function(error, doc) {
         $state = doc;
         doc.on('change', function (op) {
@@ -256,16 +260,29 @@ $(document).ready(function(){
             doc.submitOp([{p:[],od:null,oi:$seq}]);
         } else {
             snapshot = doc.snapshot
+            //alert(JSON.stringify(snapshot))
             for(sound_id in snapshot) {
                 for(step in snapshot[sound_id]) {
                     if(snapshot[sound_id][step] != 0) {
-                        alert(snapshot[sound_id][step].color)
+                        
                         $('ul#control_'+sound_id+' > .col_'+step).addClass('active').css({'background-color':snapshot[sound_id][step].color})
                     }
                 }
             }
         }
     });
+    
+    /*sharejs.open(usersdocname, 'json', function(error, doc) {
+        $state = doc;
+        doc.on('change', function (op) {
+            stateUpdated(op);
+        });
+        if (doc.created) {
+            doc.submitOp([{p:[],od:null,oi:$seq}]);
+        } else {
+            snapshot = doc.snapshot
+        }
+    });*/
     
     jQuery('select#color-picker').colourPicker({
       ico:    '/assets/jquery.colourPicker.gif', 
