@@ -88,6 +88,9 @@ function updateState($beat, color) {
 					
 	if($beat.hasClass('active')) {
 	   $beat.css({'background-color':color})
+	} else {
+		$beat.css({'background-color':'#555555'})
+		
 	}
 }
 
