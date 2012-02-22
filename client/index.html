@@ -37,8 +37,8 @@
 <label>Tempo: <span id=tempovalue></span> <abbr title="Beats per minute">BPM</abbr></label>
 <div id=temposlider></div>
 </li>
-<li><input type="text" name="username" size="8"></input></li>
-<li><select name="colour" id="color-picker">
+<li><div id=user>
+   <select name="colour" id="color-picker">
          <option value="ffffff">#ffffff</option>
          <option value="ffccc9">#ffccc9</option>
          <option value="ffce93">#ffce93</option>
@@ -102,7 +102,9 @@
          <option value="003532">#003532</option>
          <option value="010066">#010066</option>
          <option value="340096">#340096</option>
-</select></li>
+   </select>
+   <input type="text" name="username" size="6"></input>
+   </div></li>
    
 </ul> <!-- #controls -->
 </section><!-- #drumkit -->

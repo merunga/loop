@@ -67,8 +67,8 @@ ul.soundrow li.pip {
 }
 
 ul.soundrow li.active {
-	border: inset 3px #990;
-	background-color: #CC0;
+	border: inset 3px #cfcfcf;
+	/*background-color: #CC0;*/
 }
 
 ul.soundrow li.col_3,
@@ -82,9 +82,9 @@ ul.soundrow li.col_11 {
 	background-color: #FFA000;
 }
 
-/*input[name=colour] {
-   visibility: hidden;
-}*/
+input[name=colour] {
+   display: none;
+}
 
 .left {
    float: left;

@@ -83,6 +83,14 @@ function clearAll() {
 	$(".soundrow[id^=control] li.active").removeClass('active');
 }
 
+function updateState($beat, color) {
+   	$beat.toggleClass('active');
+					
+	if($beat.hasClass('active')) {
+	   $beat.css({'background-color':color})
+	}
+}
+
 // Run on DOM ready
 $(document).ready(function(){
 	// Process each of the audio items, creating a playlist sort of setup
@@ -102,13 +110,15 @@ $(document).ready(function(){
 			var $li =
 				$('<li class="pip col_'+j+'">["'+self.id+'",'+j+']</li>')
 				.click(function(){
-					$(this).toggleClass('active');
+   					usercolor = '#'+$('input[name=colour]').val()
+					updateState($(this), usercolor)
 					//buildHash();
-               //alert($(this).html())
-               $state.submitOp({
+               		//alert($(this).html())
+
+               		$state.submitOp({
     					p: eval($(this).html()),
-						ld:0, li:username
-					});
+						ld:0, oi:{'name':username,'color':usercolor}
+					});	
 				})
 				.data('sound_id', self.id);
 			$ul.append($li);
@@ -216,13 +226,15 @@ $(document).ready(function(){
 	}
     
     function stateUpdated(op) {
-       //alert(JSON.stringify(op))
+    	
 		if (op) {
-            user_src = op[0]['li']
+            user_src = op[0]['oi'].name
+            color_src = op[0]['oi'].color
             sound_id = op[0]['p'][0]
             step = op[0]['p'][1]
+            alert(user_src)
             if(user_src != username) {
-                $('ul#control_'+sound_id+' > .col_'+step).toggleClass('active')
+                updateState($('ul#control_'+sound_id+' > .col_'+step),color_src)
             }
 		} else {
             
@@ -247,7 +259,8 @@ $(document).ready(function(){
             for(sound_id in snapshot) {
                 for(step in snapshot[sound_id]) {
                     if(snapshot[sound_id][step] != 0) {
-                        $('ul#control_'+sound_id+' > .col_'+step).addClass('active')
+                        alert(snapshot[sound_id][step].color)
+                        $('ul#control_'+sound_id+' > .col_'+step).addClass('active').css({'background-color':snapshot[sound_id][step].color})
                     }
                 }
             }
